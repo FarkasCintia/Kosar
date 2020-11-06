@@ -6,6 +6,7 @@ let buttonAdd = document.getElementById("buttonAdd")
 let spanSum = document.getElementById("sum")
 let spanItemNames = document.getElementById("itemNames")
 let ulItemList = document.getElementById("itemList")
+let Table = document.getElementById("table")
 
 
 //változók
@@ -66,22 +67,38 @@ function OnButtonClicked(){
 RenderList();
 
 function RenderList(){
-    ulItemList.innerText = "";
 
-    let mappedItemList = oTomb.map(function(o){
-        let ar = o.itemCount*o.itemBasePrice;
-        return `${o.itemName} - ${o.itemCount} - ${o.itemBasePrice}Ft (${ar}Ft)`
-    })
 
-    mappedItemList.forEach((element) => {
-        let newLi = document.createElement("li");
-        newLi.innerText = element;
-        ulItemList.appendChild(newLi);
+    // ulItemList.innerText = "";
+
+    // let mappedItemList = oTomb.map(function(o){
+    //     let ar = o.itemCount*o.itemBasePrice;
+    //     return `${o.itemName} - ${o.itemCount} - ${o.itemBasePrice}Ft (${ar}Ft)`
+    // })
+
+    // mappedItemList.forEach((element) => {
+    //     let newLi = document.createElement("li");
+    //     newLi.innerText = element;
+    //     ulItemList.appendChild(newLi);
+    // });
+
+    Table.innerText = "";
+
+    let tablazatkesz = oTomb ;
+    
+    tablazatkesz.forEach(element => {
+        let sor = document.createElement("tr");
+        let oszlop = document.createElement("td");
+        oszlopok.innerText = element.itemName;
+        Table.appendChild(sor);
+        Table.appendChild(oszlop);
     });
+    
 
     //Összegek
     spanSum.innerText = GetSum();
     spanItemNames.innerText = GetNames();
+    
 
 }
 
@@ -97,4 +114,6 @@ function GetNames(){
     let oname = oTomb.map(item => item.itemName);
     return oname.join(", ");
 }
+    
+
 
