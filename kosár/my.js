@@ -84,14 +84,34 @@ function RenderList(){
 
     Table.innerText = "";
 
-    let tablazatkesz = oTomb ;
+    let tablazatkesz = oTomb;
     
     tablazatkesz.forEach(element => {
         let sor = document.createElement("tr");
-        let oszlop = document.createElement("td");
-        oszlopok.innerText = element.itemName;
+            let oszlopNev = document.createElement("td");
+            oszlopNev.innerText = element.itemName;
+            sor.appendChild(oszlopNev);
+
+            let oszlopDarab = document.createElement("td");
+            oszlopDarab.innerHTML = element.itemCount;
+            sor.appendChild(oszlopDarab);
+
+            let oszlopAr = document.createElement("td");
+            oszlopAr.innerHTML = element.itemBasePrice + " Ft";
+            sor.appendChild(oszlopAr);
+
+            let oszlopTorles = document.createElement("td");
+                let torlesGomb = document.createElement("button");
+                    torlesGomb.innerHTML = "Törlés";
+                    torlesGomb.onclick = function(){
+                        let index = oTomb.indexOf(element);
+                        console.log(index);
+                        oTomb.splice(index, 1);
+                        RenderList();
+                    }
+                oszlopTorles.appendChild(torlesGomb);
+            sor.appendChild(oszlopTorles);
         Table.appendChild(sor);
-        Table.appendChild(oszlop);
     });
     
 
